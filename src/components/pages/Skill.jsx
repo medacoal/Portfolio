@@ -1,50 +1,121 @@
-import React from 'react'
-import Wrapper from '../reuseables/Wrapper'
-import mobile from "../../assets/images/Vector (5).png"
-import tag from "../../assets/images/tag 1.png"
-import testing from "../../assets/images/carbon_ibm-engineering-test-mgmt.png"
-import pen from "../../assets/images/feather-pen 1.png"
+import React, { useContext, useEffect } from "react";
+import {
+  FaHtml5,
+  FaCss3Alt,
+  FaJs,
+  FaReact,
+  FaNodeJs,
+  FaGitAlt,
+  FaGithub,
+} from "react-icons/fa";
+import {
+  SiTailwindcss,
+  SiBootstrap,
+  SiMongodb,
+  SiExpress,
+  SiNextdotjs,
+} from "react-icons/si";
+import { ThemeContext } from "../../context/ThemeContext";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Skill = () => {
+  const themeContext = useContext(ThemeContext);
+  const isDarkMode = themeContext?.isDarkMode ?? true;
+
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+      mirror: false,
+      offset: 100,
+      easing: 'ease-out',
+    });
+    AOS.refresh();
+  }, []);
+
+  const skills = [
+    { name: "HTML", icon: <FaHtml5 size={45} className="text-[#E34F26]" /> },
+    { name: "CSS", icon: <FaCss3Alt size={45} className="text-[#1572B6]" /> },
+    { name: "JavaScript", icon: <FaJs size={45} className="text-[#F7DF1E]" /> },
+    { name: "React", icon: <FaReact size={45} className="text-[#61DAFB]" /> },
+    { 
+      name: "Next.js", 
+      icon: <SiNextdotjs size={45} className={isDarkMode ? "text-white" : "text-black"} /> 
+    },
+    { name: "Node.js", icon: <FaNodeJs size={45} className="text-[#339933]" /> },
+    { 
+      name: "Express.js", 
+      icon: <SiExpress size={45} className={isDarkMode ? "text-white" : "text-black"} /> 
+    },
+    { name: "MongoDB", icon: <SiMongodb size={45} className="text-[#47A248]" /> },
+    { name: "Tailwind CSS", icon: <SiTailwindcss size={45} className="text-[#06B6D4]" /> },
+    { name: "Bootstrap", icon: <SiBootstrap size={45} className="text-[#7952B3]" /> },
+    { name: "Git", icon: <FaGitAlt size={45} className="text-[#F05032]" /> },
+    { 
+      name: "GitHub", 
+      icon: <FaGithub size={45} className={isDarkMode ? "text-white" : "text-black"} /> 
+    },
+  ];
+
   return (
-   <Wrapper>
-     
-<section id="skills">
-<div className=' py-10'>
-        <div className='text-center lg:text-start '>
-            <h2 className='my-3' style={{ fontFamily: 'Roboto', fontWeight: '600', fontSize: '21.33px',lineHeight:'32px'}}>My Skills</h2>
-            <h1 className='' style={{ fontFamily: 'Roboto', fontWeight: '700', fontSize: '64px',lineHeight:'76.8px'}}>My Expertise</h1>
+    <section
+      id="skills"
+      className="py-16 w-full"
+    >
+      <div className={`w-full transition-colors duration-300 py-10 ${
+        isDarkMode ? 'bg-[#202327]' : 'bg-[#cbd5e1]'
+      }`}>
+        
+        {/* HEADER */}
+        <div 
+          data-aos="fade-down"
+          data-aos-duration="800"
+          className="flex flex-col items-center text-center my-10 px-6"
+        >
+          <h3 
+            data-aos="fade-up"
+            data-aos-duration="600"
+            data-aos-delay="100"
+            className="text-xl font-semibold"
+          >
+            My <span className="text-blue-600 italic">Skills</span>
+          </h3>
+          <p 
+            data-aos="fade-up"
+            data-aos-duration="600"
+            data-aos-delay="200"
+            className={`mt-2 transition-colors duration-300 ${
+              isDarkMode ? 'text-gray-300' : 'text-gray-700'
+            }`}
+          >
+            Technologies and tools I use to build modern, scalable applications.
+          </p>
         </div>
-        <div className='grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-5'>
-            <div className='bg-[#F5FCFF] rounded-xl p-5 w-full lg:w-70 h-auto hover:bg-slate-300 my-7 text-center lg:text-start border-0 hover:border-b-4 hover:border-[#6348f3] '>
-                <img src={mobile} alt='mobile' className='border bg-slate-50 rounded-2xl py-2 p-1 mx-auto lg:mx-0'/>
-                <h1 className='' style={{ fontFamily: 'Roboto', fontWeight: '700', fontSize: '32px',lineHeight:'44.8px'}}>Responsive Design</h1>
-                <p className=''style={{ fontFamily: 'Roboto', fontWeight: '400', fontSize: '21.33px',lineHeight:'32px'}}>I have a solid expertise in responsive design, which is vital for creating user-friendly web applications that work well on any device. I focus on using fluid grids and flexible layouts to ensure that my designs adapt seamlessly to different screen sizes. By employing CSS media queries, I can customize styles based on the device's characteristics, enhancing the overall user experience. Additionally, I utilize frameworks like Tailwind CSS to streamline the design process and ensure that my applications are not only visually appealing but also accessible and easy to navigate across all platforms.</p>
+
+        {/* SKILLS GRID */}
+        <div className={`grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 font-medium px-6 transition-colors duration-300 ${
+          isDarkMode ? 'text-white' : 'text-gray-900'
+        }`}>
+          {skills.map((skill, index) => (
+            <div
+              key={index}
+              data-aos="fade-up"
+              data-aos-duration="600"
+              data-aos-delay={index * 50}
+              className="flex flex-col items-center justify-center py-6 transition duration-300 hover:scale-105"
+            >
+              <div className="mb-3 hover:scale-150 transition-transform duration-300">
+                {skill.icon}
+              </div>
+              <p className="text-center">{skill.name}</p>
             </div>
-            <div className='bg-[#F5FCFF] rounded-xl p-5 w-full lg:w-70 h-auto hover:bg-slate-300 my-7 text-center lg:text-start border-0 hover:border-b-4 hover:border-[#6348f3] '>
-                <img src={tag} alt='logo' className='border bg-slate-50 rounded-2xl py-2 p-1 h-16 mx-auto lg:mx-0 '/>
-                <h1  style={{ fontFamily: 'Roboto', fontWeight: '700', fontSize: '32px',lineHeight:'44.8px'}}>Front-End Frameworks</h1>
-                <p style={{ fontFamily: 'Roboto', fontWeight: '400', fontSize: '21.33px',lineHeight:'32px'}}>I specialize in frontend frameworks, particularly React, which allows me to build dynamic and interactive user interfaces efficiently. My expertise includes leveraging component-based architecture to create reusable UI components, enhancing maintainability and scalability. I also have experience with state management libraries like Redux and integrating APIs to fetch and display data seamlessly. By utilizing Tailwind CSS, I can design responsive and visually appealing layouts that improve user experience across devices. My focus on performance optimization and best practices ensures that the applications I develop are not only functional but also fast and user-friendly.</p>
-            </div>
-            <div className='bg-[#F5FCFF] rounded-xl p-5 w-full lg:w-70 h-auto hover:bg-slate-300 my-7 text-center lg:text-start border-0 hover:border-b-4 hover:border-[#6348f3]'>
-                <img src={testing} alt='ux' className='border bg-slate-50 rounded-2xl py-2 p-1 h-16 mx-auto lg:mx-0'/>
-                <h1  style={{ fontFamily: 'Roboto', fontWeight: '700', fontSize: '32px',lineHeight:'44.8px'}}>Testing and Debugging</h1>
-                <p style={{ fontFamily: 'Roboto', fontWeight: '400', fontSize: '21.33px',lineHeight:'32px'}}>
-                I have a solid expertise in responsive design, which is vital for creating user-friendly web applications that work well on any device. I focus on using fluid grids and flexible layouts to ensure that my designs adapt seamlessly to different screen sizes. By employing CSS media queries, I can customize styles based on the device's characteristics, enhancing the overall user experience. Additionally, I utilize frameworks like Tailwind CSS to streamline the design process and ensure that my applications are not only visually appealing but also accessible and easy to navigate across all platforms.</p>
-            </div>
-            <div className='bg-[#F5FCFF] rounded-xl p-5 w-full lg:w-70 h-auto hover:bg-slate-300 my-7 text-center lg:text-start border-0 hover:border-b-4 hover:border-[#6348f3]'>
-                <img src={pen} alt='dev' className='border bg-slate-50 rounded-2xl py-2 p-1 h-16 mx-auto lg:mx-0'/>
-                <h1  style={{ fontFamily: 'Roboto', fontWeight: '700', fontSize: '32px',lineHeight:'44.8px'}}>Cloud Services</h1>
-                <p style={{ fontFamily: 'Roboto', fontWeight: '400', fontSize: '21.33px',lineHeight:'32px'}}>
-                I have a strong expertise in cloud services, which allows me to build scalable and reliable applications. I am familiar with platforms like AWS and Azure, enabling me to deploy applications efficiently while managing resources effectively. My experience includes using cloud storage solutions for data management and leveraging serverless architecture to optimize performance and reduce costs. By integrating cloud services into my projects, I ensure that applications are not only robust but also easily maintainable and adaptable to changing user needs.</p>
-            </div>
+          ))}
         </div>
-     </div>
-</section>
 
-   </Wrapper>
-  )
-}
+      </div>
+    </section>
+  );
+};
 
-export default Skill
-
+export default Skill;

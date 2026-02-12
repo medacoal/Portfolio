@@ -1,43 +1,228 @@
-import React from 'react';
-import Wrapper from '../reuseables/Wrapper';
-import me from "../../assets/images/IMG_5195.JPG";
+import React, { useContext, useEffect } from "react";
+import { useTypewriter, Cursor } from "react-simple-typewriter";
+import {
+  FaGithub,
+  FaLinkedin,
+  FaTwitter,
+  FaInstagram,
+  FaDownload,
+} from "react-icons/fa";
+import Wrapper from "../reuseables/Wrapper";
+import me from "../../assets/images/IMG_5559.JPG";
+import { ThemeContext } from "../../context/ThemeContext";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Home = () => {
+  const themeContext = useContext(ThemeContext);
+  const isDarkMode = themeContext?.isDarkMode ?? true;
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: false,
+      mirror: true,
+      offset: 120,
+      easing: 'ease-in-out',
+    });
+    AOS.refresh();
+  }, []);
+
+  const [text] = useTypewriter({
+    words: [
+      "Frontend Developer",
+      "Full Stack Developer",
+      "Backend Developer",
+      "Blockchain Developer"
+    ],
+    loop: true,
+    typeSpeed: 70,
+    deleteSpeed: 50,
+    delaySpeed: 1500,
+  });
+
   return (
-    <div className='pt-20 pb-10 bg-[#F5FCFF]'>
+    <section 
+      id="home" 
+      className={`pt-28 pb-20 transition-colors duration-300 ${
+        isDarkMode ? 'bg-[#212428]' : 'bg-[#cbd5e1]'
+      }`}
+    >
       <Wrapper>
-      <section id="home">
-      <div className='flex flex-col md:flex-row gap-20'>  
-<div className=' flex flex-col lg:flex-row gap-10 '>
-    <div className='md:py-20 text-black  '>
-      <h1 className='text-3xl font-semibold text-center md:text-start' style={{ fontFamily: 'Roboto', fontWeight: '600', fontSize: '21.33px',}}>
-        Hey, I am Hammed
-      </h1>
-     
-     <h1 className='lg:text-5xl text-2xl font-bold text-center md:text-start lg:w-[600px]' >
-        I develop dynamic and User-Centered Web Applications.
-      </h1>
-     
-      <p className='lg:text-[21.33px] lg:font-semibold lg:font-[Roboto] md:text-start w-full' style={{ fontFamily: 'Roboto', fontWeight: '400', fontSize: '26px', Lineheight:'39px',}}>
-        My expertise spans both front-end and back-end development, enabling me to build comprehensive solutions that meet diverse client needs.
-      </p>
-      <div className='bg-[#6348f3] md:w-36 rounded-xl hover:border py-2 text-center justify-center lg:justify-between'>
-        <div className=' text-[#FFFFFF]'style={{ fontFamily: 'Roboto', fontWeight: '400', fontSize: '21.33px',lineHeight:'32px'}}>Get in Touch</div>
-      </div>
-    </div>
-  </div>
+        <div className="container mx-auto w-11/12 flex flex-col-reverse lg:flex-row items-center gap-10">
 
-  <div className='md:py-12'>
-    <img src={me} alt='face' className='w-[917.33px] h-[550px] rounded-3xl'/>
-  </div>
+          {/* LEFT CONTENT - FADE RIGHT ANIMATION */}
+          <div 
+            data-aos="fade-right"
+            data-aos-duration="1200"
+            data-aos-delay="100"
+            className="w-full lg:w-2/3 flex flex-col space-y-8"
+          >
 
-</div> 
-</section>
+            <div>
+              <h1 
+                data-aos="fade-up"
+                data-aos-duration="1000"
+                data-aos-delay="200"
+                className={`text-3xl md:text-4xl font-bold transition-colors duration-300 ${
+                  isDarkMode ? 'text-white' : 'text-gray-900'
+                }`}
+              >
+                Hi, I'm Hammed 👋
+              </h1>
 
+              <h2 
+                data-aos="fade-up"
+                data-aos-duration="1000"
+                data-aos-delay="400"
+                className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#5E3BEE] to-purple-500 mt-2"
+              >
+                a {text}
+                <Cursor cursorColor="#5E3BEE" />
+              </h2>
+
+              <p 
+                data-aos="fade-up"
+                data-aos-duration="1000"
+                data-aos-delay="600"
+                className={`text-base md:text-lg mt-4 leading-relaxed transition-colors duration-300 ${
+                  isDarkMode ? 'text-gray-300' : 'text-gray-700'
+                }`}
+              >
+                A creative developer passionate about building sleek,
+                interactive, and scalable web applications. I combine clean UI
+                design with powerful backend logic to deliver seamless digital
+                experiences that solve real-world problems.
+              </p>
+            </div>
+
+            {/* Location + Availability */}
+            <div 
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="800"
+              className={`flex flex-col md:flex-row md:gap-8 gap-3 transition-colors duration-300 ${
+                isDarkMode ? 'text-gray-300' : 'text-gray-600'
+              }`}
+            >
+              <div className="flex items-center">
+                📍 <span className="ml-2">Lagos, Nigeria</span>
+              </div>
+
+              <div className="flex items-center">
+                <span className="w-3 h-3 bg-emerald-500 rounded-full mr-2 animate-pulse"></span>
+                Available for new projects
+              </div>
+            </div>
+
+            {/* Socials + Resume */}
+            <div 
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="1000"
+              className="flex flex-col md:flex-row gap-6"
+            >
+
+              <div>
+                <h3 className={`uppercase font-semibold text-sm mb-3 transition-colors duration-300 ${
+                  isDarkMode ? 'text-gray-300' : 'text-gray-800'
+                }`}>
+                  Find me on
+                </h3>
+
+                <div className="flex gap-4 text-2xl">
+                  <a 
+                    href="https://github.com/medacoal" 
+                    target="_blank" 
+                    data-aos="zoom-in"
+                    data-aos-duration="600"
+                    data-aos-delay="1100"
+                    className={`transition-all duration-300 hover:scale-110 ${
+                      isDarkMode 
+                        ? 'text-gray-300 hover:text-[#5E3BEE]' 
+                        : 'text-gray-700 hover:text-[#5E3BEE]'
+                    }`}
+                  >
+                    <FaGithub />
+                  </a>
+                  <a 
+                    href="#" 
+                    data-aos="zoom-in"
+                    data-aos-duration="600"
+                    data-aos-delay="1200"
+                    className={`transition-all duration-300 hover:scale-110 ${
+                      isDarkMode 
+                        ? 'text-gray-300 hover:text-[#5E3BEE]' 
+                        : 'text-gray-700 hover:text-[#5E3BEE]'
+                    }`}
+                  >
+                    <FaTwitter />
+                  </a>
+                  <a 
+                    href="#" 
+                    data-aos="zoom-in"
+                    data-aos-duration="600"
+                    data-aos-delay="1300"
+                    className={`transition-all duration-300 hover:scale-110 ${
+                      isDarkMode 
+                        ? 'text-gray-300 hover:text-[#5E3BEE]' 
+                        : 'text-gray-700 hover:text-[#5E3BEE]'
+                    }`}
+                  >
+                    <FaLinkedin />
+                  </a>
+                  <a 
+                    href="#" 
+                    data-aos="zoom-in"
+                    data-aos-duration="600"
+                    data-aos-delay="1400"
+                    className={`transition-all duration-300 hover:scale-110 ${
+                      isDarkMode 
+                        ? 'text-gray-300 hover:text-[#5E3BEE]' 
+                        : 'text-gray-700 hover:text-[#5E3BEE]'
+                    }`}
+                  >
+                    <FaInstagram />
+                  </a>
+                </div>
+              </div>
+
+              <div
+                data-aos="fade-up"
+                data-aos-duration="1000"
+                data-aos-delay="1500"
+              >
+            <a
+  href="/resumee.pdf"
+  download="Hammed_Ajeigbe_Resume.pdf"
+  className="flex items-center gap-2 px-6 py-3 bg-[#5E3BEE] text-white rounded-lg font-semibold shadow-md hover:scale-105 transition duration-300"
+>
+  <FaDownload />
+  My Resume
+</a>
+              </div>
+
+            </div>
+          </div>
+
+          {/* RIGHT IMAGE - FADE LEFT ANIMATION */}
+          <div 
+            data-aos="fade-left"
+            data-aos-duration="1200"
+            data-aos-delay="300"
+            className="w-full lg:w-1/3 flex justify-center"
+          >
+            <img
+              src={me}
+              alt="Hammed"
+              className="rounded-full w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 object-cover shadow-2xl border-8 border-[#5E3BEE]"
+            />
+          </div>
+
+        </div>
       </Wrapper>
-    </div>
+    </section>
   );
 };
 
 export default Home;
-

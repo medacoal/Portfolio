@@ -3,7 +3,19 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: 'Roboto', sans-serif;
+@layer base {
+  /* Light mode default */
+  body {
+    font-family: 'Roboto', sans-serif;
+    @apply bg-gradient-to-r from-[#5E3BEE] to-purple-500 text-gray-900 transition-colors duration-300;
+  }
+
+  /* Dark mode */
+  .dark body {
+    @apply bg-[#212428] text-white transition-colors duration-300;
+  }
 }
 
+html {
+  scroll-behavior: smooth;
+}
