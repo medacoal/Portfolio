@@ -193,7 +193,7 @@ const Home = () => {
                 data-aos-delay="1500"
               >
             <a
-  href="/resumee.pdf"
+  href="/hammed-ajeigbe_CV.pdf"
   download="Hammed_Ajeigbe_Resume.pdf"
   className="flex items-center gap-2 px-6 py-3 bg-[#5E3BEE] text-white rounded-lg font-semibold shadow-md hover:scale-105 transition duration-300"
 >
